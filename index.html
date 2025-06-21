@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Abd El-Naeem | Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary:rgb(6, 241, 104);
+            --secondary: #15f773;
+            --accent: #11c556;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: var(--text);
+            transition: all 0.3s ease;
+            scroll-behavior: smooth;
+        }
+        
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-selector select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary);
+            background-color: white;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .intro h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            min-height: 120px;
+        }
+        
+        .typewriter {
+            border-right: 3px solid white;
+            white-space: pre-wrap;
+            overflow: hidden;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .highlight {
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        section {
+            padding: 4rem 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+        
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .discount-badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #eee;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .project-info p {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .project-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .project-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .modal-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .modal-description {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .modal-features {
+            margin-bottom: 20px;
+        }
+        
+        .modal-features h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .modal-features ul {
+            padding-left: 20px;
+        }
+        
+        .modal-features li {
+            margin-bottom: 8px;
+        }
+        
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: #dfe6e9;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 5px;
+        }
+        
+        .courses-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+        
+        .course-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .course-card p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-provider {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .intro h1 {
+                font-size: 2rem;
+            }
+            
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+        </select>
+    </div>
+    
+    <header>
+        <div class="profile-container">
+            <img src="https://scontent.fcai19-6.fna.fbcdn.net/v/t39.30808-1/493560232_1227344712315590_6692064092798607828_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=102&ccb=1-7&_nc_sid=e99d92&_nc_ohc=5PayeC9smBgQ7kNvwFxmD6P&_nc_oc=AdmQq1uPGdSkovTFEYWTAxabad9Z7qQcXAwrTCDO9DjTmyd1fsTwImSAGX8b0dgH1tc&_nc_zt=24&_nc_ht=scontent.fcai19-6.fna&_nc_gid=KTpINu3iMkv-ubIvHQa6Cg&oh=00_AfM3nGwm5Z-ODdRGbre6_FFrBbsl5aB_HKctySnB6nRFOA&oe=685CC016" alt="Mohammed Abd El-Naeem" class="profile-img">
+            <div class="social-links">
+                <a href="https://www.facebook.com/muhammed.abdnaeim?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-abd-el-naeem-19b299331" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:mohammedabdelnaeim18@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        
+        <div class="intro">
+            <h1>Hi, I'm <span class="highlight">Mohammed Abd El-Naeem</span></h1>
+            <p id="typewriter-text" class="typewriter"></p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
+        </div>
+        
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+    
+    <section id="services">
+        <div class="section-title">
+            <h2>My Services</h2>
+        </div>
+        
+        <div class="services-container">
+            <div class="service-card">
+                <i class="fas fa-code"></i>
+                <h3>Frontend Development</h3>
+                <p>Beautiful, responsive websites built with React, Vue.js, or vanilla JavaScript tailored to your brand.</p>
+                <div class="price">$25 <span class="original-price">$125</span></div>
+                <div class="discount-badge">80% OFF</div>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-server"></i>
+                <h3>Backend Development</h3>
+                <p>Robust server-side solutions with Node.js, Express, Django, or Laravel for your business needs.</p>
+                <div class="price">$150 <span class="original-price">$750</span></div>
+                <div class="discount-badge">80% OFF</div>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>Full Stack Development</h3>
+                <p>Complete web applications from front to back with modern technologies and best practices.</p>
+                <div class="price">$160 <span class="original-price">$1066</span></div>
+                <div class="discount-badge">85% OFF</div>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>UI/UX Design</h3>
+                <p>User-centered designs that enhance usability and create engaging digital experiences.</p>
+                <div class="price">$25 <span class="original-price">$125</span></div>
+                <div class="discount-badge">80% OFF</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="section-title">
+            <h2>Featured Projects</h2>
+        </div>
+        
+        <div class="projects-container">
+            <!-- Project 1 - E-Commerce -->
+            <div class="project-card" onclick="openModal('ecommerce')">
+                <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="E-Commerce Platform" class="project-img">
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-featured online store with product management, cart functionality, and secure payments.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">MongoDB</span>
+                        <span class="project-tag">Stripe API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 - Task App -->
+            <div class="project-card" onclick="openModal('taskapp')">
+                <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Task Management App" class="project-img">
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>A productivity application for teams to collaborate on projects with real-time updates.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Vue.js</span>
+                        <span class="project-tag">Firebase</span>
+                        <span class="project-tag">WebSockets</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 - Social Dashboard -->
+            <div class="project-card" onclick="openModal('social')">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Social Media Dashboard" class="project-img">
+                <div class="project-info">
+                    <h3>Social Media Dashboard</h3>
+                    <p>Analytics dashboard that aggregates data from multiple social platforms into one interface.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">D3.js</span>
+                        <span class="project-tag">Express</span>
+                        <span class="project-tag">OAuth</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 - Healthcare -->
+            <div class="project-card" onclick="openModal('healthcare')">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Healthcare Portal" class="project-img">
+                <div class="project-info">
+                    <h3>Healthcare Portal</h3>
+                    <p>HIPAA-compliant patient management system with appointment scheduling and telemedicine.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Angular</span>
+                        <span class="project-tag">Django</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">WebRTC</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 5 - Real Estate -->
+            <div class="project-card" onclick="openModal('realestate')">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Real Estate Platform" class="project-img">
+                <div class="project-info">
+                    <h3>Real Estate Platform</h3>
+                    <p>Property listing platform with advanced search filters, virtual tours, and agent CRM.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Next.js</span>
+                        <span class="project-tag">NestJS</span>
+                        <span class="project-tag">MongoDB</span>
+                        <span class="project-tag">Mapbox</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 6 - LMS -->
+            <div class="project-card" onclick="openModal('lms')">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Learning Management System" class="project-img">
+                <div class="project-info">
+                    <h3>Learning Management System</h3>
+                    <p>Custom LMS with course creation tools, progress tracking, and interactive quizzes.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Laravel</span>
+                        <span class="project-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 7 - Finance -->
+            <div class="project-card" onclick="openModal('finance')">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Financial Dashboard" class="project-img">
+                <div class="project-info">
+                    <h3>Financial Dashboard</h3>
+                    <p>Personal finance tracker with budgeting tools, investment tracking, and data visualization.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Chart.js</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 8 - Travel -->
+            <div class="project-card" onclick="openModal('travel')">
+                <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Travel Booking App" class="project-img">
+                <div class="project-info">
+                    <h3>Travel Booking App</h3>
+                    <p>End-to-end travel booking platform with hotel/flight search, reviews, and payment processing.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Vue.js</span>
+                        <span class="project-tag">Ruby on Rails</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Project Modals -->
+    <div id="ecommerce-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="E-Commerce Platform" class="modal-img">
+            <h3 class="modal-title">E-Commerce Platform</h3>
+            <p class="modal-description">
+                A comprehensive e-commerce solution built with modern web technologies. This platform includes product catalog management, 
+                shopping cart functionality, user authentication, and secure payment processing through Stripe API.
+            </p>
+            <div class="modal-features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Product catalog with categories and filters</li>
+                    <li>User authentication and profiles</li>
+                    <li>Shopping cart with persistent storage</li>
+                    <li>Checkout process with multiple payment options</li>
+                    <li>Admin dashboard for product management</li>
+                    <li>Order tracking and history</li>
+                </ul>
+            </div>
+            <div class="project-tags">
+                <span class="project-tag">React</span>
+                <span class="project-tag">Node.js</span>
+                <span class="project-tag">MongoDB</span>
+                <span class="project-tag">Stripe API</span>
+                <span class="project-tag">Redux</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="taskapp-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Task Management App" class="modal-img">
+            <h3 class="modal-title">Task Management App</h3>
+            <p class="modal-description">
+                A collaborative task management application designed for teams to organize projects efficiently. 
+                Features real-time updates, task assignments, progress tracking, and team communication.
+            </p>
+            <div class="modal-features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Real-time task updates using WebSockets</li>
+                    <li>Team collaboration with role-based permissions</li>
+                    <li>Task categorization with labels and priorities</li>
+                    <li>Progress tracking with visual indicators</li>
+                    <li>File attachments and comments</li>
+                    <li>Mobile-responsive design</li>
+                </ul>
+            </div>
+            <div class="project-tags">
+                <span class="project-tag">Vue.js</span>
+                <span class="project-tag">Firebase</span>
+                <span class="project-tag">WebSockets</span>
+                <span class="project-tag">Vuex</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Additional modals would follow the same pattern -->
+    
+    <section id="skills">
+        <div class="section-title">
+            <h2>Technical Skills</h2>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>React</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Vue.js</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Node.js</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Express</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Django</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Laravel</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Database</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>MongoDB</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>PostgreSQL</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>MySQL</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Firebase</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Other</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Git</span>
+                                                <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Docker</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>AWS</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>CI/CD</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="section-title">
+            <h2>Education & Courses</h2>
+        </div>
+        
+        <div class="courses-container">
+            <div class="course-card">
+                <h3>Full Stack Web Development</h3>
+                <p class="course-provider">Udemy</p>
+                <p>Comprehensive full stack development course covering HTML, CSS, JavaScript, React, Node.js, and MongoDB.</p>
+            </div>
+            
+            <div class="course-card">
+                <h3>Advanced JavaScript Concepts</h3>
+                <p class="course-provider">Frontend Masters</p>
+                <p>Deep dive into JavaScript including closures, prototypes, async programming, and design patterns.</p>
+            </div>
+            
+            <div class="course-card">
+                <h3>Computer Science Diploma</h3>
+                <p class="course-provider">free code academy</p>
+                <p>Diploma in Computer Science with focus on algorithms, data structures, and software engineering.</p>
+            </div>
+            
+            <div class="course-card">
+                <h3>Responsive Web Design</h3>
+                <p class="course-provider">freeCodeCamp</p>
+                <p>Certification in responsive design principles, CSS Flexbox, Grid, and accessibility standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 2rem;">I'm currently available for freelance work. If you have a project you want to get started or think you need my help with something, then get in touch.</p>
+            
+            <form id="contact-form" style="display: grid; gap: 1rem;">
+                <input type="text" name="name" placeholder="Your Name" required style="padding: 12px; border-radius: 5px; border: 1px solid #ddd;">
+                <input type="email" name="email" placeholder="Your Email" required style="padding: 12px; border-radius: 5px; border: 1px solid #ddd;">
+                <textarea name="message" placeholder="Your Message" rows="5" required style="padding: 12px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                <button type="submit" class="cta-button" style="cursor: pointer; border: none;">Send Message</button>
+            </form>
+            
+            <div class="social-links" style="margin-top: 2rem;">
+                <a href="https://www.facebook.com/muhammed.abdnaeim?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-abd-el-naeem-19b299331" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:mohammedabdelnaeim18@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Mohammed Abd El-Naeem. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> by Mohammed</p>
+    </footer>
+
+    <script>
+        // Typewriter effect
+        const typewriterText = document.getElementById('typewriter-text');
+        const texts = [
+            "A Full Stack Developer passionate about building web applications.",
+            "Specializing in React, Node.js, and modern JavaScript frameworks.",
+            "Creating beautiful, functional, and user-friendly digital experiences."
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typewriterText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typewriterText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1500; // Pause at end of text
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500; // Pause before typing next text
+            }
+
+            setTimeout(typeWriter, typingSpeed);
+        }
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Modal functionality
+        function openModal(projectId) {
+            document.getElementById(`${projectId}-modal`).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Language selector functionality
+        document.getElementById('language-select').addEventListener('change', function() {
+            // In a real implementation, this would load translations
+            alert('Language changed to: ' + this.value);
+        });
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Start typewriter effect
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
